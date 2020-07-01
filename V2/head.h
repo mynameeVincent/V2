@@ -1,12 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <windows.h>
+#include"brash.h"
 #include"pan.h"
 using namespace sf;
 
 Event event;
 
-/*
+
 void eva1(RenderWindow& window)
 {
 	bool c = 1;
@@ -14,26 +15,30 @@ void eva1(RenderWindow& window)
 	{
 		while (window.pollEvent(event))
 		{
-			window.clear(Color(0, 0, 0));
-			window.display();
 			switch (event.type)
 			{
-			case Event::KeyPressed:
-			{
-				if (event.key.code == Keyboard::Space)
+				case Event::MouseButtonPressed:
 				{
+					brash io(Color(0, 0, 0));
+					bool last = 1;
+					while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					{
+						sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+						io.draw(localPosition.x, localPosition.y, last, window);
+						last = 0;
+					}
+					break;
+				}
 
-				}
-				if (event.key.code == Keyboard::Delete)
+				default:
 				{
+					break;
 				}
-				break;
-			}
 			}
 		}
 	}
 }
-*/
+
 
 void eva(RenderWindow& window)
 {
@@ -44,17 +49,14 @@ void eva(RenderWindow& window)
 
 			case Event::MouseButtonPressed:
 			{
-				if (event.mouseButton.button == sf::Mouse::Left)
+				pan io(Color(255, 0, 0));
+				bool last = 1;
+				while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					pan io(Color(0, 0, 0));
-					bool last = 1;
-					while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					{
-						last = 0;
-						sf::Vector2i localPosition = sf::Mouse::getPosition(window);
-						io.draw(localPosition.x, localPosition.y, last, window);
-					}
 					
+					sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+					io.draw(localPosition.x, localPosition.y, last, window);
+					last = 0;
 				}
 				break;
 			}
@@ -70,12 +72,11 @@ void eva(RenderWindow& window)
 				break;
 			}
 			
-			/*	case Event::KeyPressed:
+			case Event::KeyPressed:
 			{
-				if (event.key.code == Keyboard::Escape)
+				if (event.key.code == Keyboard::LAlt)
 				{
 					eva1(window);
-//					window.close();
 				}
 
 				if (event.key.code == Keyboard::BackSpace)
@@ -85,7 +86,7 @@ void eva(RenderWindow& window)
 				}
 				break;
 			}
-			*/
+			
 		}
 	}
 }

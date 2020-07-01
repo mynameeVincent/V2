@@ -3,8 +3,8 @@
 int main()
 {
 	RenderWindow window(VideoMode(200, 200), "SFMLworks", Style::Fullscreen);
-	
-
+	window.clear(Color(0, 0, 0));
+	window.display();
 	while (1)
 	{
 		eva(window);

@@ -143,6 +143,7 @@
     <ClCompile Include="shit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="brash.h" />
     <ClInclude Include="head.h" />
     <ClInclude Include="pan.h" />
     <ClInclude Include="shit.h" />
